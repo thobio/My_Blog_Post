@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}
+Blog | Registrations
+{% endblock %}
+{% block body %}
+    <div class="container col-3">
+        <form method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <div class="d-grid gap-2">
+                <input type="submit" value="Register" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <footer class="footer text-center m2">
+        <p>Already have account? <a href="{% url 'account:login' %}">Login</a></p>
+    </footer>
+{% endblock %}

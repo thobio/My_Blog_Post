@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    Blog | Home
+{% endblock %}
+{% block body %}
+    {#  section will show if user login the user details and if your is logout then will show the login button to login  #}
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col flex-d">
+                <img src="media/{{ profile.profile_image }}" class="img-thumbnail" width="80" height="80" alt=""/>
+                <p>You are logged in as {{ user.username }}</p>
+                <a href="{% url 'account:logout' %}" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    {% else %}
+        <a href="{% url 'account:login' %}" class="btn btn-secondary">Login</a>
+    {% endif %}
+    {#  end of the section  #}
+
+    {#  Show all the post that are aviable in the database  #}
+    <div class="container">
+        {% for post in posts %}
+                <div class="card" style="width: 18rem;">
+                    <img src="/media/{{ post.post_image }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title}}</h5>
+                        <p>Posted by: {{ post.user.username }}</p>
+                        <p class="card-text">{{ post.post_content |truncatewords:30 }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p> Created at: {{ post.updated_at }} </p>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    {#  end of the section  #}
+{% endblock %}
