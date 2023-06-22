@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import Profile
+from django.contrib.auth.models import User
 import uuid
 # Create your models here.
 
@@ -20,7 +21,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, related_name="comments", on_delete=models.CASCADE)
-    user = models.ForeignKey(Profile, related_name="commented_user", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="commented_user", on_delete=models.CASCADE)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
