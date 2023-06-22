@@ -5,11 +5,10 @@ from django.contrib.auth.models import User
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    profile_image = forms.ImageField()
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'profile_image']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
 
 class UserLoginForm(AuthenticationForm):

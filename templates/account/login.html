@@ -2,13 +2,20 @@
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block title %}
-Blog | Login
+    Blog | Login
 {% endblock %}
 {% block body %}
     <div class="container col-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <form method="post">
             {% csrf_token %}
-            {{form|crispy}}
+            {{ form|crispy }}
             <div class="d-grid gap-2">
                 <a href="{% url 'account:forgot_password' %}">Forgot password ?</a>
                 <input type="submit" value="Login" class="btn btn-primary">

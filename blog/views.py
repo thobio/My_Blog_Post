@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from account.models import Profile
 from .models import Post
 
@@ -6,6 +6,10 @@ from .models import Post
 
 
 def home_post(request):
-    profile = Profile.objects.get(user=request.user)
-    post = Post.objects.all()
-    return render(request, 'blog/index.html', {'profile': profile, 'posts': post})
+    if not request.user.is_authenticated:
+        post = Post.objects.all()
+        return render(request, 'blog/index.html', {'posts': post})
+    else:
+        profile = Profile.objects.get(user=request.user)
+        post = Post.objects.all()
+        return render(request, 'blog/index.html', {'profile': profile, 'posts': post})

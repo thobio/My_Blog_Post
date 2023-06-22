@@ -24,7 +24,7 @@
                     <img src="/media/{{ post.post_image }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title}}</h5>
-                        <p>Posted by: {{ post.user.username }}</p>
+                        <p>Posted by: {{ post.user.user.username }}</p>
                         <p class="card-text">{{ post.post_content |truncatewords:30 }}</p>
                     </div>
                     <div class="card-footer">
