@@ -107,7 +107,7 @@
                             <p>{{ foo.body }}</p>
                             {% if foo.user_id == user.id %}
                                 <div class="footer">
-                                    <a href="" class="btn btn-danger"><span class="material-icons">delete_outline</span></a>
+                                    <a href="{% url 'blog:delete_comment' foo.id %}" class="btn btn-danger"><span class="material-icons">delete_outline</span></a>
                                     <a href="" class="btn btn-primary"><span class="material-icons">drive_file_rename_outline</span></a>
                                 </div>
                             {% endif %}
