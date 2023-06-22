@@ -17,13 +17,22 @@ def home_post(request):
 
 
 def detail_post(request, slug):
-    post = Post.objects.get(slug=slug)
+    post = Post.objects.filter(slug=slug).first()
     return render(request, 'blog/detail_page.html', {'post': post})
 
 
 def post_comment(request, pk):
     post = Post.objects.filter(id=pk).first()
     Comment.objects.create(body=request.POST.get('comment'), post=post, user=request.user)
+    redirect_url = request.META.get('HTTP_REFERER')
+    return redirect(redirect_url)
+
+
+def edit_comment(request, pk):
+    comment = Comment.objects.get(id=pk)
+    comment.body = request.POST.get('comment')
+    comment.save()
+    messages.warning(request, 'Comment successfully edited')
     redirect_url = request.META.get('HTTP_REFERER')
     return redirect(redirect_url)
 
